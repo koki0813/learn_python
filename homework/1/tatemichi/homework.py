@@ -1,3 +1,4 @@
+
 #coding:utf-8
 from PIL import Image
 import matplotlib.pyplot as plt
@@ -17,40 +18,26 @@ import numpy as np
 #灰:1割
 #赤:少々
 #みたいな事をしないといけない？
-#
-# Update
-# 10/4 初期値の確率を設定できるようにしておきました。
-#
 #--------------------------------------#
 
 
-size = (sx, sy) = np.array([64, 64])  # マップのサイズです.動作が重い時は小さくしよう.
-color_P = [ 60, 25, 10, 5]   #各色の出現確率[%]です.
+size = np.array([32, 32])  # マップのサイズです.動作が重い時は小さくしよう.
 
 many = np.prod(size)
-map_data = np.random.randint(sum(color_P), size=many).reshape(size)
+map_data = np.random.randint(5, size=many).reshape(size)
 dire = [[0,1],[-1,0],[0,-1],[1,0]]
-
-color_P_sum = 0
-for i in range(len(color_P)):
-  rang = np.logical_and( color_P_sum<=map_data, map_data<(color_P_sum+color_P[i])  )
-  map_data[ rang] = i
-  color_P_sum += color_P[i]
-
 
 try:
   while True:
-    for iy in range(sy):
-      for ix in range(sx):
-        first = True
-        for d in np.random.permutation(dire):
-	  px, py = (ix, iy) + d
-	  if (0<=py and py<sy) and (0<=px and px<sx):
-	    if first == True:
-	      first = False
-              map_data[iy, ix] = color = map_data[py, px]
-            if not map_data[py, px] == color:
-              break
+    for iy in range(1, size[1]-1):
+      for ix in range(1, size[0]-1):
+        np.random.shuffle(dire)
+        dy, dx =dire[0]
+        map_data[iy, ix] = color = map_data[iy+dy, ix+dx]
+        for d in dire:
+          dy, dx = d
+          if not map_data[iy+dy, ix+dx] == color:
+            break
         else:
           map_data[iy, ix] = color
     img_data = np.asarray(map_data)
