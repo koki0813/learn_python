@@ -7,7 +7,7 @@ Vimのコマンドを調べて楽してもいいです。(ただし、ある程�
 
 
 homework/1st/に自分のディレクトリ(英字で)を作り、
-以下のファイルをgithubにpull reqest?してください.
+以下のファイルをgithubにpull requestしてください.
 ・homework.py   (gen_map.pyをそっくり書いてください.)
 ・homework.png  (gen_map.pyを実行した結果をスクショしてください.)
 ・method.txt    (どういうコマンドを使ったか書いてください.))
